@@ -11,10 +11,12 @@ class RedisConnector {
     async connectToRedis() {
         try {
             console.log(`Connecting to ${this.url}`)
-            await redis.createClient({
+            const connection = await redis.createClient({
                 url: this.url
             })
             console.log('Connected to Redis at ' + this.url)
+            connection.get = bluebird.promisify(connection.get).bind(connection);
+            return connection
 
         }
        catch(ex) {
