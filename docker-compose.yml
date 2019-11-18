@@ -1,0 +1,16 @@
+version: "3"
+services:
+  app:
+    depends_on: ["redis"]
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - REDIS_URL='//redis'
+    volumes:
+      - /Users/rahulsinha/project/concurrency-handler:/app
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
