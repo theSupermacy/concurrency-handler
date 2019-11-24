@@ -6,7 +6,8 @@ bluebird.promisifyAll(redis.Multi.prototype);
 
 class RedisConnector {
     constructor() {
-        this.url = process.env['REDIS_URL'] 
+        // this.url = process.env["REDIS_URL"]
+        this.url = "//redis"
     }
     async connectToRedis() {
         try {
@@ -19,9 +20,9 @@ class RedisConnector {
             return connection
 
         }
-       catch(ex) {
-         console.log(`Unable to connect to Redis Server`,ex)
-       }
+        catch (ex) {
+            console.log(`Unable to connect to Redis Server`, ex)
+        }
 
     }
 

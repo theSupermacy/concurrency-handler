@@ -6,9 +6,10 @@ class Counter {
         this.connection = connection
     }
     async incrementCounter(key) {
-         await this.connection.incr(key)
-         const counter = await this.getCounterKey(key)
-         return counter
+        console.log("incrementing the key", key)
+        await this.connection.incr(key)
+        const counter = await this.getCounterKey(key)
+        return counter
     }
     async decrementCounter(key) {
         await this.connection.decr(key)
@@ -16,14 +17,14 @@ class Counter {
         return counter
     }
     async getCounterKey(key) {
-       const data =  await this.connection.get(key)
-       return data
+        const data = await this.connection.get(key)
+        return data
     }
     async resetCounter(key) {
         await this.connection.set(key, 0)
     }
     static async getInstance() {
-        if(instance) {
+        if (instance) {
             return instance
         }
         const connection = await redisConnection.connectToRedis()
@@ -32,4 +33,4 @@ class Counter {
     }
 }
 
-module.exports =  Counter
+module.exports = Counter
